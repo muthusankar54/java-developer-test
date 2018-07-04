@@ -15,23 +15,21 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @Configuration
-@EnableGlobalMethodSecurity(securedEnabled = true)
-@Order(SecurityProperties.BASIC_AUTH_ORDER)
 @Profile("customuserdetails")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public UserDetailsService mongoUserDetails() {
-        return new UserDetailServiceImpl();
-    }
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        UserDetailsService userDetailsService = mongoUserDetails();
-        auth.userDetailsService(userDetailsService);
+    private UserDetailsService userDetailsService;
+
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public SecurityConfiguration(UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userDetailsService = userDetailsService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -42,13 +40,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .fullyAuthenticated()
                 .and().httpBasic();
-                 httpSecurity.csrf().disable();
+                 httpSecurity.csrf().disable()
+                         .addFilter(new JWTAuthentication(authenticationManager()))
+                         .addFilter(new JWTAuthorization(authenticationManager()));
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
-
 
 }

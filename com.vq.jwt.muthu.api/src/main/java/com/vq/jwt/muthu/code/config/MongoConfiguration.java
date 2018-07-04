@@ -13,6 +13,6 @@ public class MongoConfiguration {
 
     @Bean
     public MongoClient createConnection() {
-        return new MongoClient("172.17.0.2:27017");
+        return new MongoClient("localhost:27017");
     }
 }

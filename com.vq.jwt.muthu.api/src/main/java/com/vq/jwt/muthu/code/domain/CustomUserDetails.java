@@ -6,11 +6,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 public class CustomUserDetails extends User implements UserDetails {
-    private String username;
+    private String userEmail;
     private String password;
 
-    public CustomUserDetails(String username,String pass) {
-        this.username = username;
+    public CustomUserDetails(){
+
+    }
+
+    public CustomUserDetails(String userEmail,String pass) {
+        this.userEmail = userEmail;
         this.password = pass;
     }
 
@@ -27,6 +31,11 @@ public class CustomUserDetails extends User implements UserDetails {
 
     @Override
     public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public String getUserEmail() {
         return super.getUserEmail();
 
     }

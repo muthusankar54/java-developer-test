@@ -1,15 +1,22 @@
 package com.vq.jwt.muthu.code.service;
 
-import com.mongodb.MongoClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.vq.jwt.muthu.code.domain.CustomUserDetails;
+import com.vq.jwt.muthu.code.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserDetailServiceImpl  implements UserDetailsService {
 
     @Autowired
@@ -18,18 +25,23 @@ public class UserDetailServiceImpl  implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         System.out.println("Inside loadUser method");
-        MongoDatabase database = mongoClient.getDatabase("springsecurity");
-        MongoCollection<org.bson.Document> collection = database.getCollection("users");
-        org.bson.Document document = collection.find(Filters.eq("email",email)).first();
-        if(document!=null) {
-            String userEmail = document.getString("userEmail");
-            String password = document.getString("password");
-            CustomUserDetails mongoUserDetails = new CustomUserDetails(userEmail,password);
-            return mongoUserDetails;
-        }
-        return null;
+        Mongo mongo = new Mongo("localhost", 27017);
+        DB db = mongo.getDB("springsecurity");
+        System.out.println("db==>"+db.getName());
+        DBCollection collection = db.getCollection("users");
+        System.out.println("collection==>"+collection.getFullName());
+        BasicDBObject searchQuery = new BasicDBObject();
+        searchQuery.put("userEmail", email);
+        System.out.println("searchQuery"+searchQuery.toJson());
+        DBObject doc = collection.findOne();
+        CustomUserDetails customUserDetails = new CustomUserDetails();
+        String userEmail = email;
+        String password = (String) doc.get("password");
+        customUserDetails.setUserEmail(email);
+        customUserDetails.setPassword(password);
+        System.out.println("userEmail"+customUserDetails.getUserEmail());
+        System.out.println("pass"+customUserDetails.getPassword());
+        return customUserDetails;
     }
-
 }
-
 
