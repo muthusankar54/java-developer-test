@@ -1,5 +1,7 @@
 package com.vq.jwt.muthu.code.security;
 
+import com.vq.jwt.muthu.code.domain.CustomUserDetails;
+import com.vq.jwt.muthu.code.service.UserDetailServiceImpl;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,16 +15,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.vq.jwt.muthu.code.security.SecuirityConstants.HEADER_STRING;
-import static com.vq.jwt.muthu.code.security.SecuirityConstants.SECRET;
-import static com.vq.jwt.muthu.code.security.SecuirityConstants.TOKEN_PREFIX;
+import static com.vq.jwt.muthu.code.config.SecuirityConstants.HEADER_STRING;
+import static com.vq.jwt.muthu.code.config.SecuirityConstants.SECRET;
+import static com.vq.jwt.muthu.code.config.SecuirityConstants.TOKEN_PREFIX;
 
 public class JWTAuthorization extends BasicAuthenticationFilter {
 
+    private final UserDetailServiceImpl userDetailService;
 
-    public JWTAuthorization(AuthenticationManager authManager) {
+    public JWTAuthorization(AuthenticationManager authManager,UserDetailServiceImpl userDetailService) {
         super(authManager);
+        this.userDetailService=userDetailService;
     }
+
+
     @Override
     protected void doFilterInternal(HttpServletRequest req,
                                     HttpServletResponse res,
@@ -39,14 +45,13 @@ public class JWTAuthorization extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
-            // parse the token.
             String user = Jwts.parser()
                     .setSigningKey(SECRET)
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody()
                     .getSubject();
             if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+                return new UsernamePasswordAuthenticationToken(CustomUserDetails.class, null);
             }
             return null;
         }

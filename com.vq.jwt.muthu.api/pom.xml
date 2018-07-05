@@ -11,5 +11,11 @@
 
     <artifactId>com.vq.jwt.muthu.api</artifactId>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

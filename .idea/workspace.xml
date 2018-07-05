@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aec5e73a-4430-4d64-9e0c-d83ce6693d18" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.vq.jwt.muthu.api/ApiModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/com.vq.jwt.muthu.api/ApiModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.vq.jwt.muthu.api/src/main/java/com/vq/jwt/muthu/code/config/MongoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.vq.jwt.muthu.api/src/main/java/com/vq/jwt/muthu/code/config/MongoConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.vq.jwt.muthu.api/src/main/java/com/vq/jwt/muthu/code/domain/CustomUserDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.vq.jwt.muthu.api/src/main/java/com/vq/jwt/muthu/code/domain/CustomUserDetails.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/com.vq.jwt.muthu.api/src/main/java/com/vq/jwt/muthu/code/security/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.vq.jwt.muthu.api/src/main/java/com/vq/jwt/muthu/code/security/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.vq.jwt.muthu.api/src/main/java/com/vq/jwt/muthu/code/service/UserDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.vq.jwt.muthu.api/src/main/java/com/vq/jwt/muthu/code/service/UserDetailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.vq.jwt.muthu.api/src/main/resources/api.properties.properties" beforeDir="false" afterPath="$PROJECT_DIR$/com.vq.jwt.muthu.api/src/main/resources/api.properties.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java-developer-test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/java-developer-test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mqtt-jwt-muthu-api/MQTTAPI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/mqtt-jwt-muthu-api/MQTTAPI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -38,8 +29,8 @@
       <file leaf-file-name="SecurityConfiguration.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/com.vq.jwt.muthu.api/src/main/java/com/vq/jwt/muthu/code/security/SecurityConfiguration.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="164">
+              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -472,12 +463,12 @@
       <workItem from="1530425476336" duration="13322000" />
       <workItem from="1530502091473" duration="2035000" />
       <workItem from="1530553551380" duration="11782000" />
-      <workItem from="1530638582642" duration="7487000" />
+      <workItem from="1530638582642" duration="8800000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34626000" />
+    <option name="totallyTimeSpent" value="35939000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -909,8 +900,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/com.vq.jwt.muthu.api/src/main/java/com/vq/jwt/muthu/code/security/SecurityConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="164">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

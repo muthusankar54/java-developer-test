@@ -14,19 +14,19 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
 
-@Component
+
+
 public class UserDetailServiceImpl  implements UserDetailsService {
 
-    @Autowired
-    private MongoClient mongoClient;
+//    @Autowired
+//    private MongoClient mongoClient;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         System.out.println("Inside loadUser method");
         Mongo mongo = new Mongo("localhost", 27017);
-        DB db = mongo.getDB("springsecurity");
+        DB db = mongo.getDB("auth");
         System.out.println("db==>"+db.getName());
         DBCollection collection = db.getCollection("users");
         System.out.println("collection==>"+collection.getFullName());
@@ -35,13 +35,14 @@ public class UserDetailServiceImpl  implements UserDetailsService {
         System.out.println("searchQuery"+searchQuery.toJson());
         DBObject doc = collection.findOne();
         CustomUserDetails customUserDetails = new CustomUserDetails();
-        String userEmail = email;
-        String password = (String) doc.get("password");
-        customUserDetails.setUserEmail(email);
-        customUserDetails.setPassword(password);
-        System.out.println("userEmail"+customUserDetails.getUserEmail());
-        System.out.println("pass"+customUserDetails.getPassword());
+            String userEmail = email;
+            String password = (String) doc.get("password");
+            customUserDetails.setEmail(email);
+            customUserDetails.setPassword(password);
+
         return customUserDetails;
     }
+
 }
+
 

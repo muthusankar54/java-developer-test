@@ -1,21 +1,54 @@
 package com.vq.jwt.muthu.code.domain;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class CustomUserDetails extends User implements UserDetails {
-    private String userEmail;
+
+public class CustomUserDetails implements UserDetails {
+
+
+    @Override
+    public String toString() {
+        System.out.println("useremail==>"+getUsername()+" passs"+getPassword());
+        return super.toString();
+    }
+
+    private String email;
     private String password;
 
     public CustomUserDetails(){
 
     }
 
-    public CustomUserDetails(String userEmail,String pass) {
-        this.userEmail = userEmail;
+
+    public CustomUserDetails(String email,String pass) {
+        this.email = email;
         this.password = pass;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
 
@@ -24,21 +57,6 @@ public class CustomUserDetails extends User implements UserDetails {
         return null;
     }
 
-    @Override
-    public String getPassword() {
-        return super.getPassword();
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
-    public String getUserEmail() {
-        return super.getUserEmail();
-
-    }
 
     @Override
     public boolean isAccountNonExpired() {
